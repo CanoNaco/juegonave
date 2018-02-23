@@ -29,8 +29,8 @@ public class JuegoNave extends Application {
     //variable de velocidad de giro
     int navVelGiro;
     //Variables de la posicion nave
-    double posX = 400;
-    double posY = 200;
+//    double posX = 400;
+//    double posY = 200;
     //
     double AstAngulo = Math.random()*359;
     
@@ -57,7 +57,7 @@ public class JuegoNave extends Application {
         root.getChildren().add(nave.getNave());
         
         root.getChildren().add(asteroide.getAsteroide());
-               
+                       
         ventana.setOnKeyPressed((KeyEvent event) -> {
             
             switch(event.getCode()){
@@ -72,6 +72,7 @@ public class JuegoNave extends Application {
                     break;
                 case SPACE:
                     bala = new Bala(nave.posX, nave.posY, nave.angulo);
+                    
                     root.getChildren().add(bala.getBala());
                     break;
             }
@@ -88,6 +89,8 @@ public class JuegoNave extends Application {
     AnimationTimer animacionNave = new AnimationTimer() {
             @Override
         public void handle(long now) {
+            
+//            System.out.println(bala.posX);
             
             asteroide.movAsteroide();
             

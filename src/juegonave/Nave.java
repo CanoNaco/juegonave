@@ -24,7 +24,7 @@ public class Nave {
     
     double posX = ventanaX/2;
     double posY = ventanaY/2;
-    
+        
     public Nave() {
         poligonoNave.setFill(Color.RED);
         poligonoNave.getPoints().addAll(new Double[]{

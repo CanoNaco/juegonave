@@ -58,5 +58,7 @@ public class Asteroide {
     
     public Polygon getAsteroide(){
         return asteroide;
-    }   
+    }
+    
+    
 }
