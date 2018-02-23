@@ -37,12 +37,14 @@ public class JuegoNave extends Application {
           
     //Variables ventana
     final int ventanaX =1300;
-    final int ventanaY =720;
+    final int ventanaY =700;
     Scene ventana;
     
     Nave nave = new Nave();
     
     Asteroide asteroide = new Asteroide();
+    
+    Bala bala;
     
     
     @Override
@@ -54,11 +56,8 @@ public class JuegoNave extends Application {
               
         root.getChildren().add(nave.getNave());
         
-        Asteroide asteroide = new Asteroide();
         root.getChildren().add(asteroide.getAsteroide());
-        
-        
-        
+               
         ventana.setOnKeyPressed((KeyEvent event) -> {
             
             switch(event.getCode()){
@@ -70,6 +69,10 @@ public class JuegoNave extends Application {
                     break;
                 case UP:
                     nave.acelerar();
+                    break;
+                case SPACE:
+                    bala = new Bala(nave.posX, nave.posY, nave.angulo);
+                    root.getChildren().add(bala.getBala());
                     break;
             }
         });
@@ -90,6 +93,9 @@ public class JuegoNave extends Application {
             
             nave.moverNave();
             
+            if (bala != null){
+                bala.moverBala();
+            }    
                 
         }
     };

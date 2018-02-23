@@ -3,9 +3,8 @@ package juegonave;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
-
-
 public class Nave {
+    
     Polygon poligonoNave = new Polygon ();
       
     double angulo;
