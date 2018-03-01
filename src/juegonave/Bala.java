@@ -9,7 +9,7 @@ public class Bala {
     
     double angulo;
     double resto;
-    double anguloRAD;
+    double anguloRad;
     
     int velGiro;
     
@@ -34,36 +34,19 @@ public class Bala {
         
         posX = x;
         posY = y;
-        
-        angulo = a;
-        resto = angulo % 360;
-        anguloRAD = Math.toRadians(resto);
-        
-        dirX = Math.sin(anguloRAD);
-        dirY = Math.cos(anguloRAD);
+        angulo = a;        
     }
     
     public void moverBala() {
+        resto = angulo % 360;
+        anguloRad = Math.toRadians(resto);
         
-        //resto = angulo % 360;
-        //anguloRAD = Math.toRadians(resto);
-        
+        dirX = Math.sin(anguloRad);
+        dirY = Math.cos(anguloRad);
+               
         posX += dirX * vel;
         posY += -(dirY * vel);
-        
-//        if (posX >= ventanaX){
-//                posX = 0;
-//        }
-//        if (posY >= ventanaY){
-//                posY = 0;
-//        }
-//        if (posX < 0){
-//                posX = ventanaX;
-//        }
-//        if (posY < 0){
-//                posY = ventanaY;
-//        }
-                
+       
         formaBala.setCenterX(posX);
         formaBala.setCenterY(posY);
     }
@@ -71,4 +54,6 @@ public class Bala {
     public Circle getBala() {  
         return formaBala;
     }
+    
+    
 }

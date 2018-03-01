@@ -32,7 +32,7 @@ public class Nave {
             10.0, 0.0,
             0.0, -5.0,
             -10.0, 0.0});
-    };
+    }
     
     public Polygon getNave(){
         return poligonoNave;
@@ -68,7 +68,6 @@ public class Nave {
         angulo += velGiro;
         
         poligonoNave.setRotate(resto);
-       
     }
     
     public void acelerar(){

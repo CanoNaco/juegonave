@@ -1,5 +1,6 @@
 package juegonave;
 
+import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -9,8 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 
-public class JuegoNave extends Application {
-      
+public class JuegoNave extends Application { 
     //variable angulo de la nave
     double naveAngulo;
     //variable direccion (aplicado de 0 a 359 grados)
@@ -28,13 +28,9 @@ public class JuegoNave extends Application {
     double velNave;
     //variable de velocidad de giro
     int navVelGiro;
-    //Variables de la posicion nave
-//    double posX = 400;
-//    double posY = 200;
-    //
-    double AstAngulo = Math.random()*359;
     
-          
+    double AstAngulo = Math.random()*359;
+              
     //Variables ventana
     final int ventanaX =1300;
     final int ventanaY =700;
@@ -46,6 +42,7 @@ public class JuegoNave extends Application {
     
     Bala bala;
     
+    ArrayList <Bala> listaBala = new ArrayList();
     
     @Override
     public void start(Stage primaryStage) {
@@ -57,7 +54,7 @@ public class JuegoNave extends Application {
         root.getChildren().add(nave.getNave());
         
         root.getChildren().add(asteroide.getAsteroide());
-                       
+                              
         ventana.setOnKeyPressed((KeyEvent event) -> {
             
             switch(event.getCode()){
@@ -70,9 +67,10 @@ public class JuegoNave extends Application {
                 case UP:
                     nave.acelerar();
                     break;
-                case SPACE:
-                    bala = new Bala(nave.posX, nave.posY, nave.angulo);
+                case SPACE:                    
                     
+                    bala = new Bala(nave.posX, nave.posY, nave.angulo);
+                    listaBala.add(bala);
                     root.getChildren().add(bala.getBala());
                     break;
             }
@@ -84,22 +82,25 @@ public class JuegoNave extends Application {
 
         //Llamada a la animación
         animacionNave.start();
+        
+        
     }//Cierre Método Start
     
     AnimationTimer animacionNave = new AnimationTimer() {
             @Override
         public void handle(long now) {
-            
-//            System.out.println(bala.posX);
-            
+                       
             asteroide.movAsteroide();
             
             nave.moverNave();
             
-            if (bala != null){
+//            if (bala != null){
+//                bala.moverBala();
+//            }    
+            for(int i=0; i<listaBala.size(); i++){
+                Bala bala = listaBala.get(i);
                 bala.moverBala();
-            }    
-                
+            }     
         }
     };
 }
