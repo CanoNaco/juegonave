@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
 public class Asteroide {
-    Polygon asteroide = new Polygon ();
+    Polygon poliAsteroide = new Polygon ();
     
     double angulo = Math.random()*359;
     double direccion = angulo % 360;
@@ -20,8 +20,8 @@ public class Asteroide {
     int velGiro = 1;
         
     public Asteroide(){
-        asteroide.setFill(Color.BLUE);
-        asteroide.getPoints().addAll(new Double[]{
+        poliAsteroide.setFill(Color.BLUE);
+        poliAsteroide.getPoints().addAll(new Double[]{
             0.0, 10.0,
             40.0, -10.0,
             100.0, 10.0,
@@ -48,16 +48,16 @@ public class Asteroide {
                 posY = ventanaY;
         }
         
-        asteroide.setLayoutX(posX);
-        asteroide.setLayoutY(posY);
+        poliAsteroide.setLayoutX(posX);
+        poliAsteroide.setLayoutY(posY);
         
         angulo += velGiro;
         
-        asteroide.setRotate(angulo);
+        poliAsteroide.setRotate(angulo);
     }
     
     public Polygon getAsteroide(){
-        return asteroide;
+        return poliAsteroide;
     }
     
     

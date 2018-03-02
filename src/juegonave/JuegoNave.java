@@ -3,11 +3,16 @@ package juegonave;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Shape;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class JuegoNave extends Application { 
@@ -44,9 +49,13 @@ public class JuegoNave extends Application {
     
     ArrayList <Bala> listaBala = new ArrayList();
     
+    Pane root = new Pane();
+    
+    //Text gameOver = new Text ("Game Over");
+    
     @Override
     public void start(Stage primaryStage) {
-        Pane root = new Pane();
+        
         ventana = new Scene(root, ventanaX, ventanaY, Color.WHITE);
         primaryStage.setScene(ventana);
         primaryStage.show();
@@ -68,7 +77,6 @@ public class JuegoNave extends Application {
                     nave.acelerar();
                     break;
                 case SPACE:                    
-                    
                     bala = new Bala(nave.posX, nave.posY, nave.angulo);
                     listaBala.add(bala);
                     root.getChildren().add(bala.getBala());
@@ -76,14 +84,29 @@ public class JuegoNave extends Application {
             }
         });
         
+        root.getStylesheets().add("estilo/estilo.css");
+        
         ventana.setOnKeyReleased((KeyEvent event) -> {
             nave.giro(0);
         });
-
         //Llamada a la animación
         animacionNave.start();
+        //mostrar mensaje de fin de partida
         
+        HBox gameOver = new HBox();
+        gameOver.setTranslateX(100);
+        gameOver.setTranslateY(100);
+        gameOver.setMinWidth(ventanaX);
+        gameOver.setAlignment(Pos.CENTER);
+        gameOver.setSpacing(100);
         
+        root.getChildren().add(gameOver);
+        
+        Text textoGameOver = new Text("Game Over");
+        textoGameOver.setFont(Font.font(50));
+        textoGameOver.setFill(Color.WHITE);
+        
+        gameOver.getChildren().add(textoGameOver);
     }//Cierre Método Start
     
     AnimationTimer animacionNave = new AnimationTimer() {
@@ -93,14 +116,25 @@ public class JuegoNave extends Application {
             asteroide.movAsteroide();
             
             nave.moverNave();
-            
-//            if (bala != null){
-//                bala.moverBala();
-//            }    
+               
             for(int i=0; i<listaBala.size(); i++){
                 Bala bala = listaBala.get(i);
                 bala.moverBala();
-            }     
+            }
+
+            Shape perder = Shape.intersect(nave.poliNave,asteroide.poliAsteroide);
+            boolean perderVacio = perder.getBoundsInLocal().isEmpty();
+            
+            if (perderVacio == false){
+                System.out.println("Game Over");
+            }
+            
+//            Shape punto = Shape.intersect(bala.formaBala,asteroide.poliAsteroide);
+//            boolean puntoVacio = perder.getBoundsInLocal().isEmpty();
+//            
+//            if (puntoVacio == false){
+//                System.out.println("punto");
+//            }
         }
     };
 }

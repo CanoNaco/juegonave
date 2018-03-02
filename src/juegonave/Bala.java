@@ -53,7 +53,6 @@ public class Bala {
     
     public Circle getBala() {  
         return formaBala;
-    }
-    
+    }   
     
 }

@@ -5,7 +5,7 @@ import javafx.scene.shape.Polygon;
 
 public class Nave {
     
-    Polygon poligonoNave = new Polygon ();
+    Polygon poliNave = new Polygon ();
       
     double angulo;
     double resto;
@@ -26,8 +26,8 @@ public class Nave {
     double posY = ventanaY/2;
         
     public Nave() {
-        poligonoNave.setFill(Color.RED);
-        poligonoNave.getPoints().addAll(new Double[]{
+        poliNave.setFill(Color.RED);
+        poliNave.getPoints().addAll(new Double[]{
             0.0, -30.0,
             10.0, 0.0,
             0.0, -5.0,
@@ -35,7 +35,7 @@ public class Nave {
     }
     
     public Polygon getNave(){
-        return poligonoNave;
+        return poliNave;
     }
     
     public void giro(int valorVelocidad){
@@ -62,12 +62,12 @@ public class Nave {
                 posY = ventanaY;
         }
                 
-        poligonoNave.setLayoutX(posX);
-        poligonoNave.setLayoutY(posY);
+        poliNave.setLayoutX(posX);
+        poliNave.setLayoutY(posY);
         
         angulo += velGiro;
         
-        poligonoNave.setRotate(resto);
+        poliNave.setRotate(resto);
     }
     
     public void acelerar(){
