@@ -47,12 +47,14 @@ public class JuegoNave extends Application {
     
     Bala bala;
     
+    Juego juego = new Juego();
+    
+    //listas
     ArrayList <Bala> listaBala = new ArrayList();
+    ArrayList <Asteroide> listaAster = new ArrayList();
     
     Pane root = new Pane();
-    
-    //Text gameOver = new Text ("Game Over");
-    
+        
     @Override
     public void start(Stage primaryStage) {
         
@@ -82,6 +84,12 @@ public class JuegoNave extends Application {
                     root.getChildren().add(bala.getBala());
                     break;
             }
+            //crear los asteroides
+            for(int i=0; i<=3; i++){
+                asteroide = new Asteroide();
+                listaAster.add(asteroide);
+                //System.out.println(listaAster.get(i));
+            }
         });
         
         root.getStylesheets().add("estilo/estilo.css");
@@ -92,29 +100,13 @@ public class JuegoNave extends Application {
         //Llamada a la animación
         animacionNave.start();
         //mostrar mensaje de fin de partida
-        
-        HBox gameOver = new HBox();
-        gameOver.setTranslateX(100);
-        gameOver.setTranslateY(100);
-        gameOver.setMinWidth(ventanaX);
-        gameOver.setAlignment(Pos.CENTER);
-        gameOver.setSpacing(100);
-        
-        root.getChildren().add(gameOver);
-        
-        Text textoGameOver = new Text("Game Over");
-        textoGameOver.setFont(Font.font(50));
-        textoGameOver.setFill(Color.WHITE);
-        
-        gameOver.getChildren().add(textoGameOver);
+
     }//Cierre Método Start
     
     AnimationTimer animacionNave = new AnimationTimer() {
             @Override
         public void handle(long now) {
                        
-            asteroide.movAsteroide();
-            
             nave.moverNave();
                
             for(int i=0; i<listaBala.size(); i++){
@@ -122,15 +114,21 @@ public class JuegoNave extends Application {
                 bala.moverBala();
             }
 
+            for(int i=0; i<listaAster.size(); i++){
+                Asteroide asteroide = listaAster.get(i); 
+                asteroide.movAsteroide();
+            }
+            
             Shape perder = Shape.intersect(nave.poliNave,asteroide.poliAsteroide);
             boolean perderVacio = perder.getBoundsInLocal().isEmpty();
             
             if (perderVacio == false){
-                System.out.println("Game Over");
+                juego.gameOver(root);
+                animacionNave.stop();   
             }
             
 //            Shape punto = Shape.intersect(bala.formaBala,asteroide.poliAsteroide);
-//            boolean puntoVacio = perder.getBoundsInLocal().isEmpty();
+//            boolean puntoVacio = punto.getBoundsInLocal().isEmpty();
 //            
 //            if (puntoVacio == false){
 //                System.out.println("punto");

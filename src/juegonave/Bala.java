@@ -3,8 +3,6 @@ package juegonave;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-
-
 public class Bala {
     
     double angulo;
