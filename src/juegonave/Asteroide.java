@@ -20,7 +20,8 @@ public class Asteroide {
     int velGiro = 1;
         
     public Asteroide(){
-        poliAsteroide.setFill(Color.BLUE);
+        poliAsteroide.setId("a");
+        //poliAsteroide.setFill(Color.BLUE);
         poliAsteroide.getPoints().addAll(new Double[]{
             0.0, 10.0,
             40.0, -10.0,

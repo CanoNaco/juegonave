@@ -14,7 +14,7 @@ public class Bala {
     double dirX;
     double dirY;
     
-    double vel = 3;
+    double vel = 10;
     
     final int ventanaX =1300;
     final int ventanaY =720;

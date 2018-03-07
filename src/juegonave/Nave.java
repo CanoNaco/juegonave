@@ -26,7 +26,7 @@ public class Nave {
     double posY = ventanaY/2;
         
     public Nave() {
-        poliNave.setFill(Color.RED);
+        poliNave.setId("n");
         poliNave.getPoints().addAll(new Double[]{
             0.0, -30.0,
             10.0, 0.0,
