@@ -12,6 +12,10 @@ public class Juego {
     final int ventanaX =1300;
     final int ventanaY =700;
     
+    Text textScore;
+    
+    int tamText = 40;
+    
     public void gameOver(Pane p){
         //mostrar mensaje de fin de partida
         HBox gameOver = new HBox();
@@ -27,5 +31,53 @@ public class Juego {
         textoGameOver.setFill(Color.WHITE);
         
         gameOver.getChildren().add(textoGameOver);
+    }
+    public void marcador (Pane root){
+        //Layout Principal
+        HBox paneScores = new HBox();
+        paneScores.setTranslateY(20);
+        paneScores.setMinWidth(ventanaX);
+        paneScores.setAlignment(Pos.CENTER);
+        paneScores.setSpacing(100);
+        root.getChildren().add(paneScores);
+        
+        //Layout para puntuacion actual
+        HBox paneCurrentScore = new HBox();
+        paneCurrentScore.setSpacing(20);
+        paneScores.getChildren().add(paneCurrentScore);
+        
+        //Layout para la puntuación máxima
+        HBox paneHighScore = new HBox();
+        paneCurrentScore.setSpacing(20);
+        paneScores.getChildren().add(paneHighScore);
+        
+        //Texto de la etiqueta para la puntuación
+        Text textTitleScore = new Text("Score:");
+        textTitleScore.setFont(Font.font(tamText));
+        textTitleScore.setFill(Color.WHITE);
+
+        //texto para la puntuacion
+        textScore = new Text("0");
+        textScore.setFont(Font.font(tamText));
+        textScore.setFill(Color.WHITE);
+        
+        //Texto de etiqueta ara la puntiacion maxima
+        Text textTitleHighScore = new Text("Max Score: ");
+        textTitleHighScore.setFont(Font.font(tamText));
+        textTitleHighScore.setFill(Color.WHITE);
+        
+        //Texto puntuacion maxima
+        Text textHighScore = new Text("0");
+        textHighScore.setFont(Font.font(tamText));
+        textHighScore.setFill(Color.WHITE);
+        
+        //Añadir texto a los los layout reservados para ellos
+        paneCurrentScore.getChildren().add(textTitleScore);
+        paneCurrentScore.getChildren().add(textScore);
+        paneHighScore.getChildren().add(textTitleHighScore);
+        paneHighScore.getChildren().add(textHighScore);
+    }
+    public void hScore(){
+      
     }
 }

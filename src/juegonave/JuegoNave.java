@@ -97,6 +97,8 @@ public class JuegoNave extends Application {
             asteroide = new Asteroide();
             listaAster.add(asteroide);
             root.getChildren().add(asteroide.getAsteroide());
+            
+        juego.marcador(root);
         }
         
         root.getStylesheets().add("estilo/estilo.css");
@@ -119,7 +121,7 @@ public class JuegoNave extends Application {
             for(int i=0; i<listaBala.size(); i++){
                 Bala bala = listaBala.get(i);
                 bala.moverBala();
-                
+
                 for (int o=0; o<listaAster.size(); o++){
                     Asteroide asteroide = listaAster.get(o);
                     punto = Shape.intersect(bala.formaBala,asteroide.poliAsteroide);
@@ -128,13 +130,15 @@ public class JuegoNave extends Application {
                     if (puntoVacio == false){
                         suprAster = listaAster.get(o);
                         suprBala = listaBala.get(i);
+                        listaBala.remove(suprBala);
+                        listaAster.remove(suprAster);
+                        root.getChildren().remove(asteroide.getAsteroide());
+                        root.getChildren().remove(bala.getBala());
                     }
                 }
-                
-                
-                listaBala.remove(suprBala);
-                listaAster.remove(suprAster);
             }
+            root.getChildren().remove(suprAster);
+            root.getChildren().remove(suprBala);
 
             for(int i=0; i<listaAster.size(); i++){
                 Asteroide asteroide = listaAster.get(i); 
@@ -147,13 +151,6 @@ public class JuegoNave extends Application {
                     animacionNave.stop();   
                 }
             }
-            
-//            punto = Shape.intersect(bala.formaBala,asteroide.poliAsteroide);
-//            boolean puntoVacio = punto.getBoundsInLocal().isEmpty();
-//            
-//            if (puntoVacio == false){
-//                System.out.println("punto");
-//            }
         }
     };
 }
