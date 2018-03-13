@@ -16,30 +16,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class JuegoNave extends Application { 
-    //variable angulo de la nave
-    double naveAngulo;
-    //variable direccion (aplicado de 0 a 359 grados)
-    double direccion;
-    //variable direccion convertida en radianes
-    double direccionRAD;
-    //variable direccion X aplicando seno del angulo
-    double navDirX;
-    //variable direccion Y aplicando coseno del angulo
-    double navDirY;
-    //variable de velocidad de la nave
-    double navVelX;
-    double navVelY;
-    
-    double velNave;
-    //variable de velocidad de giro
-    int navVelGiro;
-    
-    double AstAngulo = Math.random()*359;
-              
     //Variables ventana
     final int ventanaX =1300;
-    final int ventanaY =700;
-    
+    final int ventanaY =700;    
     //colisiones
     Shape perder;
     Shape punto;
@@ -56,11 +35,21 @@ public class JuegoNave extends Application {
     //listas
     ArrayList <Bala> listaBala = new ArrayList();
     ArrayList <Asteroide> listaAster = new ArrayList();
-    
+    //variables para las colisiones
     Asteroide suprAster;
     Bala suprBala;
     
     Pane root = new Pane();
+    
+    int numAster = 3;
+    
+    public void mostrarAst(){
+        for(int i=0; i<numAster; i++){
+            asteroide = new Asteroide();
+            listaAster.add(asteroide);
+            root.getChildren().add(asteroide.getAsteroide());
+        }
+    }
         
     @Override
     public void start(Stage primaryStage) {
@@ -90,16 +79,16 @@ public class JuegoNave extends Application {
                     listaBala.add(bala);
                     root.getChildren().add(bala.getBala());
                     break;
+                case R:
+                    
+                    break;
             }
         });
         //crear los asteroides
-        for(int i=0; i<3; i++){
-            asteroide = new Asteroide();
-            listaAster.add(asteroide);
-            root.getChildren().add(asteroide.getAsteroide());
-            
+        mostrarAst();
+//        asteroide.crear(root);
+        
         juego.marcador(root);
-        }
         
         root.getStylesheets().add("estilo/estilo.css");
         
@@ -115,6 +104,11 @@ public class JuegoNave extends Application {
     AnimationTimer animacionNave = new AnimationTimer() {
             @Override
         public void handle(long now) {
+            
+            if (listaAster.size() == 0){
+                numAster++;
+                mostrarAst();
+            }
                        
             nave.moverNave();
                
@@ -134,6 +128,7 @@ public class JuegoNave extends Application {
                         listaAster.remove(suprAster);
                         root.getChildren().remove(asteroide.getAsteroide());
                         root.getChildren().remove(bala.getBala());
+                        juego.scoreAum();
                     }
                 }
             }
@@ -148,6 +143,7 @@ public class JuegoNave extends Application {
             
                 if (perderVacio == false){
                     juego.gameOver(root);
+                    juego.scoreMax();
                     animacionNave.stop();   
                 }
             }

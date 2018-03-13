@@ -13,6 +13,10 @@ public class Juego {
     final int ventanaY =700;
     
     Text textScore;
+    Text textHighScore;
+    
+    int score;
+    int highScore;
     
     int tamText = 40;
     
@@ -67,7 +71,7 @@ public class Juego {
         textTitleHighScore.setFill(Color.WHITE);
         
         //Texto puntuacion maxima
-        Text textHighScore = new Text("0");
+        textHighScore = new Text("0");
         textHighScore.setFont(Font.font(tamText));
         textHighScore.setFill(Color.WHITE);
         
@@ -77,7 +81,19 @@ public class Juego {
         paneHighScore.getChildren().add(textTitleHighScore);
         paneHighScore.getChildren().add(textHighScore);
     }
-    public void hScore(){
-      
+    
+    public void scoreAum(){
+        score++;
+        textScore.setText(String.valueOf(score));
+    }
+    public void scoreMax(){
+        if (score > highScore) {
+            highScore = score;
+            textHighScore.setText(String.valueOf(highScore));
+        }    
+    }
+    public void reset(){
+        score = 0;
+        textScore.setText(String.valueOf(score));
     }
 }
